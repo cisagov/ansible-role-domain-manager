@@ -20,7 +20,7 @@
 
 - name: Configure GhostWriter Settings
   lineinfile:
-    path: /opt/GhostWriter/.envs/.local/.django #change to production file path when ready
+    path: /opt/GhostWriter/.envs/.local/.django #Change to production file path when ready
     regexp: '{{ item.regex }}'
     line: '{{ item.line }}'
     backrefs: yes
@@ -34,7 +34,7 @@
     - { regex: '^NAMECHEAP_API_KEY', line: "NAMECHEAP_API_KEY={{ NameCheap_API_Key }}" }
     - { regex: '^NAMECHEAP_USERNAME', line: "NAMECHEAP_USERNAME={{ NameCheap_Username }}" }
     - { regex: '^NAMECHEAP_API_USERNAME', line: "NAMECHEAP_API_USERNAME={{ NameCheap_API_Username }}" }
-    - { regex: '^CLIENT_IP', line: "CLIENT_IP=64.69.57.2" }
+    - { regex: '^CLIENT_IP', line: "CLIENT_IP={{ NameCheap_Client_IP }}" }
 
 - name: Build Docker Container
   command: chdir=/opt/GhostWriter docker-compose -f local.yml up -d
