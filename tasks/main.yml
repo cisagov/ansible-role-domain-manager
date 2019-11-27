@@ -1,2 +1,41 @@
 ---
-# tasks file for skeleton
+- name: Create GhostWriter Install Directory
+  file:
+    path: /opt/GhostWriter
+    state: directory
+    mode: '0755'
+
+- name: Download GhostWriter package
+  git:
+    repo: https://github.com/GhostManager/GhostWriter.git
+    dest: /opt/GhostWriter/
+    version: latest
+
+- name: Copy Template Files
+  copy:
+    src: /opt/GhostWriter/.envs_template/
+    dest: /opt/GhostWriter/.envs/
+    directory_mode: yes
+    mode: '0755'
+
+- name: Configure GhostWriter Settings
+  lineinfile:
+    path: /opt/GhostWriter/.envs/.local/.django #change to production file path when ready
+    regexp: '{{ item.regex }}'
+    line: '{{ item.line }}'
+    backrefs: yes
+  loop:
+    - { regex: '^VIRUSTOTAL_API_KEY', line: "VIRUSTOTAL_API_KEY={{ VirusTotal_API_Key }}" }
+    - { regex: '^SLACK_ENABLE', line: "SLACK_ENABLE=False" }
+    - { regex: '^COMPANY_NAME', line: "COMPANY_NAME=CISA Cyber Assessments" }
+    - { regex: '^COMPANY_TWITTER', line: "COMPANY_TWITTER=@cisagov" }
+    - { regex: '^COMPANY_EMAIL', line: "COMPANY_EMAIL=NCATS_INFO@cisa.dhs.gov" }
+    - { regex: '^NAMECHEAP_ENABLE', line: "NAMECHEAP_ENABLE=True" }
+    - { regex: '^NAMECHEAP_API_KEY', line: "NAMECHEAP_API_KEY={{ NameCheap_API_Key }}" }
+    - { regex: '^NAMECHEAP_USERNAME', line: "NAMECHEAP_USERNAME={{ NameCheap_Username }}" }
+    - { regex: '^NAMECHEAP_API_USERNAME', line: "NAMECHEAP_API_USERNAME={{ NameCheap_API_Username }}" }
+    - { regex: '^CLIENT_IP', line: "CLIENT_IP=64.69.57.2" }
+
+- name: Build Docker Container
+  command: chdir=/opt/GhostWriter docker-compose -f local.yml up -d
+  when: 'GhostWriter Container not active'

@@ -1,0 +1,7 @@
+---
+# vars file for ansible-role-domain-manager
+
+VirusTotal_API_Key: "{{ lookup('aws_ssm', '<SSM LOCATION>') }}"
+NameCheap_API_Key: "{{ lookup('aws_ssm', '<SSM LOCATION>') }}"
+NameCheap_Username: "{{ lookup('aws_ssm', '<SSM LOCATION>') }}"
+NameCheap_API_Username: "{{ lookup('aws_ssm', '<SSM LOCATION>') }}"
