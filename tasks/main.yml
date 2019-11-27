@@ -1,22 +1,40 @@
 ---
+- name: Install git
+  package:
+    name: git
+
+- name: Install docker
+  package:
+    name: docker
+
+- name: Install docker-compose
+  package:
+    name: docker-compose
+
 - name: Create GhostWriter Install Directory
   file:
-    path: /opt/GhostWriter
+    path: /opt/GhostWriter/
     state: directory
     mode: '0755'
 
-- name: Download GhostWriter package
+- name: Download GhostWriter Package
   git:
     repo: https://github.com/GhostManager/GhostWriter.git
     dest: /opt/GhostWriter/
-    version: latest
+    version: master
 
-- name: Copy Template Files
+- name: Create GhostWriter Settings Directory
+  file:
+    path: /opt/GhostWriter/.envs/
+    state: directory
+    mode: '0755'
+
+- name: Copy GhostWriter Template Files to Settings Directory
   copy:
     src: /opt/GhostWriter/.envs_template/
     dest: /opt/GhostWriter/.envs/
+    remote_src: yes
     directory_mode: yes
-    mode: '0755'
 
 - name: Configure GhostWriter Settings
   lineinfile:
@@ -24,18 +42,18 @@
     regexp: '{{ item.regex }}'
     line: '{{ item.line }}'
     backrefs: yes
-  loop:
-    - { regex: '^VIRUSTOTAL_API_KEY', line: "VIRUSTOTAL_API_KEY={{ VirusTotal_API_Key }}" }
+  loop: #Uncomment lines once variables are stored in AWS Secure Storage
+    #- { regex: '^VIRUSTOTAL_API_KEY', line: "VIRUSTOTAL_API_KEY={{ VirusTotal_API_Key }}" }
     - { regex: '^SLACK_ENABLE', line: "SLACK_ENABLE=False" }
     - { regex: '^COMPANY_NAME', line: "COMPANY_NAME=CISA Cyber Assessments" }
     - { regex: '^COMPANY_TWITTER', line: "COMPANY_TWITTER=@cisagov" }
     - { regex: '^COMPANY_EMAIL', line: "COMPANY_EMAIL=NCATS_INFO@cisa.dhs.gov" }
     - { regex: '^NAMECHEAP_ENABLE', line: "NAMECHEAP_ENABLE=True" }
-    - { regex: '^NAMECHEAP_API_KEY', line: "NAMECHEAP_API_KEY={{ NameCheap_API_Key }}" }
-    - { regex: '^NAMECHEAP_USERNAME', line: "NAMECHEAP_USERNAME={{ NameCheap_Username }}" }
-    - { regex: '^NAMECHEAP_API_USERNAME', line: "NAMECHEAP_API_USERNAME={{ NameCheap_API_Username }}" }
-    - { regex: '^CLIENT_IP', line: "CLIENT_IP={{ NameCheap_Client_IP }}" }
+    #- { regex: '^NAMECHEAP_API_KEY', line: "NAMECHEAP_API_KEY={{ NameCheap_API_Key }}" }
+    #- { regex: '^NAMECHEAP_USERNAME', line: "NAMECHEAP_USERNAME={{ NameCheap_Username }}" }
+    #- { regex: '^NAMECHEAP_API_USERNAME', line: "NAMECHEAP_API_USERNAME={{ NameCheap_API_Username }}" }
+    #- { regex: '^CLIENT_IP', line: "CLIENT_IP={{ NameCheap_Client_IP }}" }
 
-- name: Build Docker Container
-  command: chdir=/opt/GhostWriter docker-compose -f local.yml up -d
-  when: 'GhostWriter Container not active'
+- name: Build Docker Container #Failing to build
+  shell: "cd /opt/GhostWriter && docker-compose -f local.yml up -d" #Change to production file when ready
+  changed_when: True
