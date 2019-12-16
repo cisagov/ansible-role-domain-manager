@@ -3,22 +3,6 @@
   package:
     name: git
 
-- name: Install docker
-  package:
-    name: docker
-
-- name: Install docker-compose
-  package:
-    name: docker-compose
-
-- name: Install pip
-  easy_install:
-    name: pip
-
-- name: Install docker-py
-  pip:
-    name: docker-py
-
 - name: Create GhostWriter Install Directory
   file:
     path: /opt/GhostWriter/
@@ -62,11 +46,6 @@
     #- { regex: '^NAMECHEAP_API_USERNAME', line: "NAMECHEAP_API_USERNAME={{ NameCheap_API_Username }}" }
     #- { regex: '^CLIENT_IP', line: "CLIENT_IP={{ NameCheap_Client_IP }}" }
 
-- name: Start Docker #Failing to build
-  service:
-    name: docker
-    state: restarted
-
-- name: Build Docker Container
-  command: "docker-compose -f /opt/GhostWriter/local.yml up -d"
-  changed_when: 'True'
+#- name: Build Docker Container
+#  command: 'docker-compose -f /opt/GhostWriter/local.yml up -d'
+#  changed_when: 'True'

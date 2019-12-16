@@ -8,7 +8,7 @@ This is a project to provision a Domain Manager server.
 
 ## Requirements ##
 
-None.
+This role uses the `git` Ansible module.
 
 ## Role Variables ##
 
@@ -17,7 +17,11 @@ need to be changed for your environment.
 
 ## Dependencies ##
 
-None.
+This project has the following dependencies:
+
+* [ansible-role-docker](https://github.com/cisagov/ansible-role-docker)
+
+* [ansible-role-pip](https://github.com/cisagov/ansible-role-pip)
 
 ## Contributing ##
 
