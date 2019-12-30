@@ -46,6 +46,22 @@
     #- { regex: '^NAMECHEAP_API_USERNAME', line: "NAMECHEAP_API_USERNAME={{ NameCheap_API_Username }}" }
     #- { regex: '^CLIENT_IP', line: "CLIENT_IP={{ NameCheap_Client_IP }}" }
 
-#- name: Build Docker Container
-#  command: 'docker-compose -f /opt/GhostWriter/local.yml up -d'
-#  changed_when: 'True'
+- name: Start Docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+  when:
+    - ansible_service_mgr == "systemd"
+
+- name: populate service facts
+  service_facts:
+
+- debug:
+    var: ansible_facts.services["docker"]
+
+#- name: Start GhostWriter Docker Container
+#  shell: docker-compose -f local.yml run -d >> log.txt
+#  args:
+#    chdir: /opt/GhostWriter
+#    creates: log.txt
