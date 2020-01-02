@@ -27,6 +27,7 @@
     dest: /opt/GhostWriter/.envs/
     remote_src: yes
     directory_mode: yes
+  changed_when: false
 
 - name: Configure GhostWriter Settings
   lineinfile:
@@ -45,23 +46,4 @@
     #- { regex: '^NAMECHEAP_USERNAME', line: "NAMECHEAP_USERNAME={{ NameCheap_Username }}" }
     #- { regex: '^NAMECHEAP_API_USERNAME', line: "NAMECHEAP_API_USERNAME={{ NameCheap_API_Username }}" }
     #- { regex: '^CLIENT_IP', line: "CLIENT_IP={{ NameCheap_Client_IP }}" }
-
-- name: Start Docker
-  systemd:
-    name: docker
-    state: started
-    enabled: yes
-  when:
-    - ansible_service_mgr == "systemd"
-
-- name: populate service facts
-  service_facts:
-
-- debug:
-    var: ansible_facts.services["docker"]
-
-#- name: Start GhostWriter Docker Container
-#  shell: docker-compose -f local.yml run -d >> log.txt
-#  args:
-#    chdir: /opt/GhostWriter
-#    creates: log.txt
+  changed_when: false
