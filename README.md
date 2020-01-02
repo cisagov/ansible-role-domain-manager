@@ -5,6 +5,7 @@
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-domain-manager.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-domain-manager/context:python)
 
 This is a project to provision a Domain Manager server.
+Setup: [GhostWriter wiki](https://ghostwriter.wiki/documentation/installation/first-server-run)
 
 ## Requirements ##
 
