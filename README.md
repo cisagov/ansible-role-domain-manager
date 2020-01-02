@@ -44,4 +44,4 @@ with this waiver of copyright interest.
 
 ## Author Information ##
 
-Krysta Coble - <krysacoble@gmail.com>
+Krysta Coble - <krystacoble@gmail.com>
