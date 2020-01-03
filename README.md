@@ -1,40 +1,24 @@
-# ansible-role-domain-manager #
+# ansible-role-domain-manager 🐑 #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-domain-manager/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-domain-manager/actions)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-domain-manager.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-domain-manager/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-domain-manager.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-domain-manager/context:python)
 
-This is a skeleton project that can be used to quickly get a new
-[cisagov](https://github.com/cisagov) Ansible role GitHub project
-started.  This skeleton project contains
-[licensing information](LICENSE), as well as
-[pre-commit hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for an Ansible role.
+This is a project to provision a Domain Manager server.
+Setup: [GhostWriter wiki](https://ghostwriter.wiki/documentation/installation/first-server-run)
 
 ## Requirements ##
 
-None.
+This role uses the `git` Ansible module.
 
 ## Role Variables ##
 
-None.
+Look at [vars/main.yml](vars/main.yml) for variables that
+need to be changed for your environment.
 
 ## Dependencies ##
 
 None.
-
-## Example Playbook ##
-
-Here's how to use it in a playbook:
-
-```yaml
-- hosts: all
-  become: yes
-  become_method: sudo
-  roles:
-    - skeleton
-```
 
 ## Contributing ##
 
@@ -56,4 +40,4 @@ with this waiver of copyright interest.
 
 ## Author Information ##
 
-First Last - <first.last@trio.dhs.gov>
+Krysta Coble - <krystacoble@gmail.com>
