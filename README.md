@@ -18,11 +18,7 @@ need to be changed for your environment.
 
 ## Dependencies ##
 
-This project has the following dependencies:
-
-* [ansible-role-docker](https://github.com/cisagov/ansible-role-docker)
-
-* [ansible-role-pip](https://github.com/cisagov/ansible-role-pip)
+None.
 
 ## Contributing ##
 
