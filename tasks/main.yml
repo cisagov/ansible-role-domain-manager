@@ -27,6 +27,7 @@
     dest: /opt/GhostWriter/.envs/
     remote_src: yes
     directory_mode: yes
+    mode: preserve
   changed_when: false
 
 - name: Configure GhostWriter Settings
@@ -35,6 +36,7 @@
     regexp: '{{ item.regex }}'
     line: '{{ item.line }}'
     backrefs: yes
+    mode: preserve
   loop: #Uncomment lines once variables are stored in AWS Secure Storage
     #- { regex: '^VIRUSTOTAL_API_KEY', line: "VIRUSTOTAL_API_KEY={{ VirusTotal_API_Key }}" }
     - { regex: '^SLACK_ENABLE', line: "SLACK_ENABLE=False" }
