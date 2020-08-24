@@ -7,7 +7,7 @@
   file:
     path: /opt/GhostWriter/
     state: directory
-    mode: '0755'
+    mode: 0755
 
 - name: Download GhostWriter Package
   git:
@@ -19,7 +19,7 @@
   file:
     path: /opt/GhostWriter/.envs/
     state: directory
-    mode: '0755'
+    mode: 0755
 
 - name: Copy GhostWriter Template Files to Settings Directory
   copy:
