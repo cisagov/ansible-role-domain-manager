@@ -25,6 +25,7 @@
   copy:
     src: /opt/GhostWriter/.envs_template/
     dest: /opt/GhostWriter/.envs/
+    mode: preserve
     remote_src: yes
     directory_mode: yes
   changed_when: false
