@@ -3,6 +3,9 @@ galaxy_info:
   author: Krysta Coble
   description: Ansible role for setting up a Domain Manager server
   company: CISA Cyber Assessments
+  galaxy_tags:
+    - domainmanager
+    - docker
   license: CC0
   min_ansible_version: 2.0
   platforms:
@@ -10,9 +13,7 @@ galaxy_info:
       versions:
         - stretch
         - buster
-  galaxy_tags:
-    - domainmanager
-    - docker
+  role_name: domain_manager
 
 dependencies:
   - src: https://github.com/cisagov/ansible-role-docker
