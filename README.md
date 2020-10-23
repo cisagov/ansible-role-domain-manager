@@ -20,9 +20,21 @@ need to be changed for your environment.
 
 None.
 
+## Example Playbook ##
+
+Here's how to use it in a playbook:
+
+```yaml
+- hosts: all
+  become: yes
+  become_method: sudo
+  roles:
+    - domain_manager
+```
+
 ## Contributing ##
 
-We welcome contributions!  Please see [here](CONTRIBUTING.md) for
+We welcome contributions!  Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for
 details.
 
 ## License ##
