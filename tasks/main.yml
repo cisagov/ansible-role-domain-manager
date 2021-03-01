@@ -1,28 +1,28 @@
 ---
 - name: Install git
-  package:
+  ansible.builtin.package:
     name: git
 
 - name: Create GhostWriter Install Directory
-  file:
+  ansible.builtin.file:
     path: /opt/GhostWriter/
     state: directory
     mode: '0755'
 
 - name: Download GhostWriter Package
-  git:
+  ansible.builtin.git:
     repo: https://github.com/GhostManager/GhostWriter.git
     dest: /opt/GhostWriter/
     version: master
 
 - name: Create GhostWriter Settings Directory
-  file:
+  ansible.builtin.file:
     path: /opt/GhostWriter/.envs/
     state: directory
     mode: '0755'
 
 - name: Copy GhostWriter Template Files to Settings Directory
-  copy:
+  ansible.builtin.copy:
     src: /opt/GhostWriter/.envs_template/
     dest: /opt/GhostWriter/.envs/
     mode: preserve
@@ -31,7 +31,7 @@
   changed_when: false
 
 - name: Configure GhostWriter Settings
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /opt/GhostWriter/.envs/.local/.django #Change to production file path when ready
     regexp: '{{ item.regex }}'
     line: '{{ item.line }}'
